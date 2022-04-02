@@ -1,7 +1,7 @@
 {
-  "name": "image-welcomer",
+  "name": "airdrop-welcomer-bot",
   "version": "2.0.0",
-  "description": "Image welcomer at it's best",
+  "description": "airdrop tool welcomer bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,8 +10,7 @@
   "engines": {
     "node": "16.x"
   },
-  "author": "ZeroDisocrd",
-  "license": "CC0-1.0",
+  "author": "longines",
   "dependencies": {
     "@keyv/sqlite": "^2.0.3",
     "axios": "^0.26.1",
