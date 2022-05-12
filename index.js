@@ -59,6 +59,10 @@ client.on("messageCreate", async message => {
     let member = await message.guild.members.fetch(message.author);
     let channelName = message.channel.name;
     let hasRole = member.roles.cache.filter(role=>{
+        //it's test code to get verifyRoleId
+        /*if(role.name=='verified'){
+            console.log("Verify Role ID:",role.id)
+        }*/
         return role.name == 'verified';
     }).size;
     if (!message.content.startsWith(prefix) && message.channel.name == 'join') {
@@ -92,7 +96,9 @@ client.on("messageCreate", async message => {
                     }))
                     .setTimestamp()
                     .setFooter('Already Validated!')
-                dm.send({ embeds: [embed]}).then(console.log).catch(console.error)
+                dm.send({ embeds: [embed]}).then(console.log).catch(e=>{
+                    console.log(e.message,"Error when send already validate message")
+                })
                 await message.delete();
             }else {
                 let embed = new MessageEmbed()
@@ -105,7 +111,9 @@ client.on("messageCreate", async message => {
                     }))
                     .setTimestamp()
                     .setFooter('Thanks For Joining!')
-                dm.send({ embeds: [embed]}).then(console.log).catch(console.error)
+                dm.send({ embeds: [embed]}).then(console.log).catch(e=>{
+                    console.log(e.message,"Error when replay join command response")
+                })
             }
 
         }
@@ -123,6 +131,8 @@ client.on("messageCreate", async message => {
                 await message.delete();
                 dm.send({embeds:[embed]}).then(()=>{
 
+                }).catch(e=>{
+                    console.log(e.message,"Error when reply invalid command notification on JOIN channel")
                 })
         }
         return;
@@ -151,7 +161,9 @@ client.on("messageCreate", async message => {
                         .setTimestamp()
                         .setFooter('Thanks For Claim!')
 
-                    message.reply({ embeds: [embed]}).then(console.log).catch(console.error)
+                    message.reply({ embeds: [embed]}).then(console.log).catch(e=>{
+                        console.log(e.message,"Error when send claim success message")
+                    })
                 } else{
                     let embed = new MessageEmbed()
                         .setTitle(`Claim Error`)
@@ -163,7 +175,9 @@ client.on("messageCreate", async message => {
                         .setTimestamp()
                         .setFooter('Sorry For Error!')
 
-                    message.reply({ embeds: [embed]}).then(console.log).catch(console.error)
+                    message.reply({ embeds: [embed]}).then(console.log).catch(e=>{
+                        console.log(e.message,"Error when send claim failed message")
+                    })
                 }
             })
             .catch(function (error) {
@@ -176,7 +190,9 @@ client.on("messageCreate", async message => {
                     }))
                     .setTimestamp()
                     .setFooter('Sorry For Error!')
-                message.reply({ embeds: [embed]}).then(console.log).catch(console.error)
+                message.reply({ embeds: [embed]}).then(console.log).catch(e=>{
+                    console.log(e.message,"Error when send claim error message")
+                })
             });
 
     }
@@ -193,7 +209,9 @@ client.on("messageCreate", async message => {
             .setTimestamp()
             //.setFooter('Thanks For Joining!')
 
-        message.reply({ embeds: [embed]}).then(console.log).catch(console.error)
+        message.reply({ embeds: [embed]}).then(console.log).catch(e=>{
+            console.log(e.message,"Error when send point result message")
+        })
     }
 });
 
